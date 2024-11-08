@@ -9,16 +9,16 @@ Parameters:
     Working folder where all files will be saved.
 - `species` (str):
     Species of the AnnData.
-- `filter` (bool):
-    Additional gene/cell filtering on the AnnData.
-- `skip` (bool):
-    Skip datasets that appear to have already been created.
+- `no-filter` (bool):
+    Do not filter gene/cell in the AnnData.
+- `no-skip` (bool):
+    Do not skip datasets that appear to have already been created.
 - `model_loc` (str):
     Location of pretrained UCE model's weights in a `.torch` file.
 - `batch_size` (int):
     Batch size for processing.
-- `CXG` (bool):
-    Use CXG model.
+- `no-CXG` (bool):
+    Do not use CXG model.
 - `nlayers` (int):
     Number of transformer layers.
 - `output_dim` (int):
@@ -98,9 +98,9 @@ if __name__ == "__main__":
                         help='Working folder where all files will be saved.')
     parser.add_argument('--species', type=str, default="human",
                         help='Species of the anndata.')
-    parser.add_argument('--filter', type=bool, default=True,
+    parser.add_argument('--filter', default=True, action=argparse.BooleanOptionalAction,
                         help='Additional gene/cell filtering on the anndata.')
-    parser.add_argument('--skip', type=bool, default=True,
+    parser.add_argument('--skip', default=True, action=argparse.BooleanOptionalAction,
                         help='Skip datasets that appear to have already been created.')
 
     # Model Arguments
@@ -123,7 +123,7 @@ if __name__ == "__main__":
                         help="Offset index, tokens after this mark are chromosome identifiers")
     parser.add_argument('--sample_size', type=int, default=1024,
                         help='Number of genes sampled for cell sentence')
-    parser.add_argument('--CXG', type=bool, default=True,
+    parser.add_argument('--CXG', default=True, action=argparse.BooleanOptionalAction,
                         help='Use CXG model.')
     parser.add_argument('--nlayers', type=int, default=4,
                         help='Number of transformer layers.')
